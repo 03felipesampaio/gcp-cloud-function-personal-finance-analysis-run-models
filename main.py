@@ -28,7 +28,7 @@ def get_dbt_command(file_path, allowed_banks):
 
 
 @functions_framework.cloud_event
-def process_new_file(event: CloudEvent) -> None:
+def trigger_dbt_run(event: CloudEvent) -> None:
     bucket_name = event.data["bucket"]
     file_path = event.data["name"]
     logger.info(f"Processing new file: gs://{bucket_name}/{file_path}")
@@ -38,7 +38,7 @@ def process_new_file(event: CloudEvent) -> None:
     job_name = os.getenv("CLOUD_RUN_JOB_NAME")
 
     job_path = f"projects/{project_id}/locations/{region}/jobs/{job_name}"
-    dbt_command = get_dbt_command(file_path)
+    dbt_command = get_dbt_command(file_path, allowed_banks=["inter", "nubank"])
 
     client = run_v2.JobsClient()
     try:
