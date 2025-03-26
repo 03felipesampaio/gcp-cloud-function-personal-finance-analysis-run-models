@@ -49,7 +49,7 @@ def process_new_file(event: CloudEvent) -> None:
                     container_overrides=[
                         run_v2.RunJobRequest.Overrides.ContainerOverride(
                             name=os.getenv("CLOUD_RUN_CONTAINER_NAME"),
-                            args=dbt_command.split(" "),
+                            args=dbt_command,
                         )
                     ]
                 ),
