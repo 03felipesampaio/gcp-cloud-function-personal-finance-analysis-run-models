@@ -1,3 +1,8 @@
+payload_example.json
+
+# Ignore generated credentials from google-github-actions/auth
+gha-creds-*.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
